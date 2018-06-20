@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>贴吧</title>
+    <title>BBS</title>
     <style>
         *{
             margin:0px;
@@ -131,6 +131,9 @@
             float:left;
             display: inline-block;
         }
+        .pages{
+
+        }
         #footer{
             width:100%;
             height:40px;
@@ -171,12 +174,17 @@
     </div>
     <div class="find">
         <div class="right">
-            <input  class="seek" type="text"/>
-            <img class="img1" src="/img/find.png" alt="搜索">
+            <form action="/likefind">
+                <input  class="seek" name="findlikename" type="text"/>
+                <img class="img1" src="/img/find.png" alt="搜索">
+            </form>
         </div>
+        <#--<div class="login" id="002">-->
+            <#--<a  class="top3" href="/login">登录</a>-->
+            <#--<a  class="top4" href="/regist">注册</a>-->
+        <#--</div>-->
         <div class="login">
-            <a  class="top3" href="/login">登录</a>
-            <a  class="top4" href="/regist">注册</a>
+            <a  class="top3" href="/userinfo">您好！${username?default(" ")}</a>
         </div>
     </div>
 </div>
@@ -210,7 +218,7 @@
             </li>
             <li class="left1">
                 <hr color="#ccffff"/>
-                <a class="left2" href="/classes/r1">r1</a>
+                <a class="left2" href="/classes/其他">其他</a>
                 <hr color="#ccffff"/>
             </li>
         </ul>
@@ -224,9 +232,9 @@
                         <tr>
                         <#--<th scope="col">#</th>-->
                             <th scope="col">标题</th>
-                            <th scope="col">发布时间</th>
-                            <th scope="col">发布者</th>
                             <th scope="col">类别</th>
+                            <th scope="col">发布者</th>
+                            <th scope="col">发布时间</th>
                             <th scope="col">详细内容</th>
                         </tr>
                         </thead>
@@ -235,17 +243,33 @@
                             <tr>
                             <#--<td scope="col">${publish.idpublish}</td>-->
                                 <td scope="col">${publish.textname}</td>
-                                <td scope="col">${publish.date?string('yyyy-MM-dd HH:mm:ss')}</td>
-                                <td scope="col">${publish.username?default(" ")}</td>
                                 <td scope="col">${publish.classes}</td>
+                                <td scope="col">${publish.username?default(" ")}</td>
+                                <td scope="col">${publish.date?string('yyyy-MM-dd HH:mm:ss')}</td>
                                 <td scope="col"><a href="/information/${publish.idpublish}">查看</a></td>
                             </tr>
                             </#items>
                         </tbody>
                     </table>
                 <#else>
-        Table is Empty
+                    暂时还没有相关消息！
                 </#list>
+            <div class="pages">
+                <#assign pages=totalpages>
+                <#assign elements=totalelements>
+                <#assign no=number>
+                <#if (no < 1)>
+                    <a href="#">上一页</a>
+                <#else>
+                    <a href="/publish/index?page=${no-1}">上一页</a>
+                </#if>
+                <#if (no == pages-1)>
+                    <a href="#">下一页</a>
+                <#else>
+                    <a href="/publish/index?page=${no+1}">下一页</a>
+                </#if>
+                <a>共${totalpages?default("0")}页，共${totalelements?default("0")}条</a>
+            </div>
         </div>
     </div>
 </div>

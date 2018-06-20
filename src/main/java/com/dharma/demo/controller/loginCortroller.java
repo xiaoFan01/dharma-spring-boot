@@ -35,18 +35,20 @@ public class loginCortroller {
     }
 
     @RequestMapping(value = "/log_in")
-    public String log_in(ModelMap map, @RequestParam("username") String name, @RequestParam("password") String password, HttpSession session){
+    public String log_in(ModelMap map, @RequestParam(name = "page",defaultValue = "0") int no,@RequestParam("username") String name, @RequestParam("password") String password, HttpSession session){
         if (loginServie.getLoginByName(name).getPassword().equals(password)){
             session.setAttribute("username",name);
-//            List<Publish> publishes = publishService.getPublishs();
-//            map.put("publishes",publishes);
-            Integer page = 0;
+            Integer page = no;
             Integer size = 13;
             Sort sort = new Sort(Sort.Direction.DESC,"idpublish");
             Pageable pageable = new PageRequest(page, size,sort);
             Page<Publish> pages = publishService.getPublishAll(pageable);
             List<Publish> lists= pages.getContent();
             map.put("publishes", lists);
+            map.put("username",session.getAttribute("username"));
+            map.put("totalpages",pages.getTotalPages());
+            map.put("totalelements",pages.getTotalElements());
+            map.put("number",page);
             return "index1";
         }
         else{

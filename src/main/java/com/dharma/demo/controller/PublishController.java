@@ -1,6 +1,6 @@
 package com.dharma.demo.controller;
 
-import com.dharma.demo.dao.JpaPublishPageDao;
+
 import com.dharma.demo.model.Publish;
 import com.dharma.demo.service.PublishService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.persistence.Id;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -32,18 +30,22 @@ public class PublishController {
         return "publish";
     }
     @RequestMapping("/index")
-    public String publish(ModelMap map){
-        Integer page = 0;
+    public String publish(ModelMap map,HttpSession session,@RequestParam(name = "page" ,defaultValue = "0") int no){
+        Integer page = no;
         Integer size = 13;
         Sort sort = new Sort(Sort.Direction.DESC,"idpublish");
-        Pageable pageable = new PageRequest(page, size,sort);
+        Pageable pageable = new PageRequest(page,size,sort);
         Page<Publish> pages = publishService.getPublishAll(pageable);
         List<Publish> lists= pages.getContent();
         map.put("publishes", lists);
+        map.put("username",session.getAttribute("username"));
+        map.put("totalpages",pages.getTotalPages());
+        map.put("totalelements",pages.getTotalElements());
+        map.put("number",page);
         return "index1";
     }
     @RequestMapping("/dopublish")
-    public String  addpublished(ModelMap map,@RequestParam String textname, @RequestParam String text,@RequestParam(name = "r1") String classes, HttpSession session) {
+    public String  addpublished(ModelMap map,@RequestParam(name = "page" ,defaultValue = "0") int no,@RequestParam String textname, @RequestParam String text,@RequestParam(name = "r1") String classes, HttpSession session) {
         Date date = new Date();
         java.sql.Date date1 = new java.sql.Date(date.getTime());
         publish.setUsername((String) session.getAttribute("username"));
@@ -56,13 +58,17 @@ public class PublishController {
         publishService.addPublished(publish);
         //List<Publish> publishes = publishService.getPublishs();
         //map.put("publishes",publishes);
-        Integer page = 0;
+        Integer page = no;
         Integer size = 13;
         Sort sort = new Sort(Sort.Direction.DESC,"idpublish");
         Pageable pageable = new PageRequest(page, size,sort);
         Page<Publish> pages = publishService.getPublishAll(pageable);
           List<Publish> lists= pages.getContent();
         map.put("publishes", lists);
+        map.put("username",session.getAttribute("username"));
+        map.put("totalpages",pages.getTotalPages());
+        map.put("totalelements",pages.getTotalElements());
+        map.put("number",page);
         return "index1";
     }
 }

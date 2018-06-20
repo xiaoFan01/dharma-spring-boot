@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>贴吧</title>
+    <title>BBS</title>
     <style>
         *{
             margin:0px;
@@ -116,12 +116,12 @@
             background-size:100% 100%;
         }
         .center1{
-            width: 70%;
+            width: 50%;
             height: 840px;
             padding:20px;
             color: black;
             position: absolute;
-            left:10px;
+            left:0px;
             right:0;
             top: 0;
             bottom: 0;
@@ -171,19 +171,20 @@
     </div>
     <div class="find">
         <div class="right">
-            <input  class="seek" type="text"/>
-            <img class="img1" src="/img/find.png" alt="搜索">
+            <form action="/likefind">
+                <input  class="seek" name="findlikename" type="text"/>
+                <img class="img1" src="/img/find.png" alt="搜索">
+            </form>
         </div>
         <div class="login">
-            <a  class="top3" href="/login">登录</a>
-            <a  class="top4" href="/regist">注册</a>
+            <a  class="top3" href="/userinfo">您好！${username?default(" ")}</a>
         </div>
     </div>
 </div>
 <div id="center">
     <div class="background">
         <div class="center1">
-            <a>${textname}</a></br>
+            <a style="font-family: Consolas;font-size: xx-large">${textname}</a></br></br></br>
             <a>${text}</a></br>
         </div>
     </div>

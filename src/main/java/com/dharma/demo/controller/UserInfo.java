@@ -24,13 +24,15 @@ public class UserInfo {
         this.username = (String)session.getAttribute("username");
         List<Publish> publishes = publishService.getByUsername(this.username);
         map.put("publishes",publishes);
+        map.put("username",session.getAttribute("username"));
         return "userinfo";
     }
     @RequestMapping(value = "/del/{id}")
-    public String delPublishById(ModelMap map, @PathVariable int id){
+    public String delPublishById(ModelMap map, @PathVariable int id,HttpSession session){
         publishService.delPublish(id);
         List<Publish> publishes = publishService.getByUsername(this.username);
         map.put("publishes",publishes);
+        map.put("username",session.getAttribute("username"));
         return "userinfo";
     }
 }

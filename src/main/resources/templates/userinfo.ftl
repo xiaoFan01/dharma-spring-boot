@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>贴吧</title>
+    <title>BBS</title>
     <style>
         *{
             margin:0px;
@@ -150,12 +150,13 @@
     </div>
     <div class="find">
         <div class="right">
-            <input  class="seek" type="text"/>
-            <img class="img1" src="/img/find.png" alt="搜索">
+            <form action="/likefind">
+                <input  class="seek" name="findlikename" type="text"/>
+                <img class="img1" src="/img/find.png" alt="搜索">
+            </form>
         </div>
         <div class="login">
-            <a  class="top3" href="/login">登录</a>
-            <a  class="top4" href="/regist">注册</a>
+            <a  class="top3" href="/userinfo">您好！${username?default(" ")}</a>
         </div>
     </div>
 </div>
@@ -168,8 +169,8 @@
                     <tr>
                     <#--<th scope="col">#</th>-->
                         <th scope="col">标题</th>
-                        <th scope="col">发布时间</th>
                         <th scope="col">类别</th>
+                        <th scope="col">发布时间</th>
                         <#--<th scope="col">详细内容</th>-->
                         <th scope="col">查看 / 删除</th>
                     </tr>
@@ -179,8 +180,8 @@
                             <tr>
                             <#--<td scope="col">${publish.idpublish}</td>-->
                                 <td scope="col">${publish.textname}</td>
-                                <td scope="col">${publish.date?string('yyyy-MM-dd HH:mm:ss')}</td>
                                 <td scope="col">${publish.classes}</td>
+                                <td scope="col">${publish.date?string('yyyy-MM-dd HH:mm:ss')}</td>
                                 <td scope="col"><a href="/information/${publish.idpublish}">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: red" href="/userinfo/del/${publish.idpublish}">删除</a></td>
                                 <#--<td scope="col"><a style="color: red" href="/userinfo/del/${publish.idpublish}">删除</a></td>-->
                             </tr>
@@ -188,7 +189,7 @@
                     </tbody>
                 </table>
             <#else>
-        Table is Empty
+                暂时还没有相关消息！
             </#list>
         </div>
     </div>

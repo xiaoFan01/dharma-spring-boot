@@ -36,6 +36,9 @@ public class PublishService {
     public List<Publish> getByClasses(String classes){
         return publishDao.findByClasses(classes);
     }
+    public Page<Publish> getByNameLike(Pageable pageable,String name){
+        return jpaPublishPageDao.findByTextnameIsLike(pageable,name);
+    }
     @Transactional
     public void addPublished(Publish publish){
         publishDao.save(publish);

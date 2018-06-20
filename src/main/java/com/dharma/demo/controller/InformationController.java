@@ -7,6 +7,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("information")
@@ -16,9 +18,10 @@ public class InformationController {
     PublishService publishService;
 
     @RequestMapping(value = "/{id}")
-    public String getInformationById(ModelMap map, @PathVariable int id){
+    public String getInformationById(ModelMap map, @PathVariable int id, HttpSession session){
         map.put("textname",publishService.getPublishById(id).getTextname());
         map.put("text",publishService.getPublishById(id).getText());
+        map.put("username",session.getAttribute("username"));
         return "information";
     }
 }

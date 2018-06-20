@@ -30,7 +30,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>贴吧</title>
+    <title>BBS</title>
     <style>
         *{
             margin:0px;
@@ -176,6 +176,16 @@
         .foot3{
             color:#000000;
         }
+        .text0{
+            padding-top: 100px;
+        }
+        .text1{
+            padding-top:20px;
+        }
+        .text2{
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
     </style>
 <#--<link rel="stylesheet" href="/css/index1.css" rel="stylesheet">-->
     <link href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"/>
@@ -199,12 +209,13 @@
     </div>
     <div class="find">
         <div class="right">
-            <input  class="seek" type="text"/>
-            <img class="img1" src="/img/find.png" alt="搜索">
+            <form action="/likefind">
+                <input  class="seek" name="findlikename" type="text"/>
+                <img class="img1" src="/img/find.png" alt="搜索">
+            </form>
         </div>
         <div class="login">
-            <a  class="top3" href="/login">登录</a>
-            <a  class="top4" href="/regist">注册</a>
+            <a  class="top3" href="/userinfo">您好！${username?default(" ")}</a>
         </div>
     </div>
 </div>
@@ -212,18 +223,23 @@
     <div class="background">
         <div class="center1">
             <form action="/publish/dopublish">
-                <div>
-                    <div>
-                        <input type="text" name="textname" placeholder="标题"/><br/>
+                <div >
+                    <div  class="text0">
+                        <input type="text" name="textname" placeholder="标题" style=" border:1px solid #fff; width:300px;height:40px;"/><br/>
                     </div>
-                    <div>
-                        <input type="text" name="text" placeholder="内容"/><br/>
+                    <div class="text1">
+                        <textarea name="text" placeholder="内容" style="width:600px; height:300px; border:1px solid #fff;"/></textarea><br/>
                     </div>
-                    <div>
+                    <div class="text2">
+                        <a>请选择发布的类型：</a></br></br>
+                        <input type="radio" name="r1" value="娱乐明星"/>娱乐明星
+                        <input type="radio" name="r1" value="热门电影"/>热门电影
+                        <input type="radio" name="r1" value="体育赛事"/>体育赛事
+                        <input type="radio" name="r1" value="网络游戏"/>网络游戏
                         <input type="radio" name="r1" value="动漫"/>动漫
                         <input type="radio" name="r1" value="其他"/>其他
                     </div>
-                    <button>
+                    <button style="width:80px;">
                         发布
                     </button>
 
