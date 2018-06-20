@@ -18,6 +18,12 @@ public class WebController {
     @Autowired
     private ProductService productService;
 
+    @RequestMapping("/login")
+    public String login(ModelMap map){
+        map.put("title","login");
+        return "login";
+    }
+
     @RequestMapping
     public String index(ModelMap map) {
         map.put("title", "FIRST BLOOD");

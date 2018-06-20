@@ -24,7 +24,7 @@ public class DemoApplication {
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurerAdapter() {
 			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/index").allowedOrigins("http://localhost:8080");
+				registry.addMapping("/index").allowedOrigins("http://localhost:8080");
 			}
 			public void addResourceHandlers(ResourceHandlerRegistry registry) {
 				registry
