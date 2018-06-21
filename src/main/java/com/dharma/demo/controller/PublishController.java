@@ -22,8 +22,6 @@ public class PublishController {
 
     @Autowired
     PublishService publishService;
-    @Autowired
-    Publish publish;
 
     @RequestMapping
     public String dopublish(ModelMap map){
@@ -48,6 +46,7 @@ public class PublishController {
     public String  addpublished(ModelMap map,@RequestParam(name = "page" ,defaultValue = "0") int no,@RequestParam String textname, @RequestParam String text,@RequestParam(name = "r1") String classes, HttpSession session) {
         Date date = new Date();
         java.sql.Date date1 = new java.sql.Date(date.getTime());
+        Publish publish = new Publish();
         publish.setUsername((String) session.getAttribute("username"));
         publish.setTextname(textname);
         publish.setText(text);

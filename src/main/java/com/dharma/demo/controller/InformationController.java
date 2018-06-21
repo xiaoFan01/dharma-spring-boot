@@ -24,4 +24,11 @@ public class InformationController {
         map.put("username",session.getAttribute("username"));
         return "information";
     }
+    @RequestMapping(value = "/02/{id}")
+    public String getInformationById02(ModelMap map, @PathVariable int id, HttpSession session){
+        map.put("textname",publishService.getPublishById(id).getTextname());
+        map.put("text",publishService.getPublishById(id).getText());
+        map.put("username",session.getAttribute("username"));
+        return "information02";
+    }
 }

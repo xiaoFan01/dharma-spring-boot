@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>BBS</title>
@@ -88,7 +88,7 @@
             display: inline-block;
             float: left;
             text-align: center;
-            /*background-color: #f7f7f7;*/
+            background-color: #f7f7f7;
             opacity: 0.7;
         }
         .left1{
@@ -104,7 +104,7 @@
         }
         .left2{
             font-size: 20px;
-            color: deeppink;
+            color: black;
             font-family: 宋体;
         }
         .background{
@@ -116,12 +116,12 @@
             background-size:100% 100%;
         }
         .center1{
-            width: 70%;
+            width: 50%;
             height: 840px;
             padding:20px;
             color: black;
             position: absolute;
-            left:10px;
+            left:0px;
             right:0;
             top: 0;
             bottom: 0;
@@ -131,7 +131,6 @@
             float:left;
             display: inline-block;
         }
-
         #footer{
             width:100%;
             height:40px;
@@ -149,17 +148,10 @@
         .foot3{
             color:#000000;
         }
-        .pages{
-            float:right;
-            position: absolute;
-            top: 760px;
-            right: 10px;
-            width: 30%;
-        }
     </style>
-    <#--<link rel="stylesheet" href="/css/index1.css" rel="stylesheet">-->
+<#--<link rel="stylesheet" href="/css/index1.css" rel="stylesheet">-->
     <link href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <#--<link href="/css/index.css" rel="stylesheet"/>-->
+<#--<link href="/css/index.css" rel="stylesheet"/>-->
     <script type="text/javascript" src="/webjars/jquery/3.3.0/jquery.min.js"></script>
 </head>
 <body>
@@ -167,13 +159,10 @@
     <div class="first">
         <ul class="top1">
             <li class="top2">
-                <a  href="/publish/index">首页</a>
+                <a  href="/admin">首页</a>
             </li>
             <li class="top2">
                 <a href="#">版面目录</a>
-            </li>
-            <li class="top2">
-                <a  href="/publish">发布</a>
             </li>
         </ul>
     </div>
@@ -184,97 +173,16 @@
                 <img class="img1" src="/img/find.png" alt="搜索">
             </form>
         </div>
-        <#--<div class="login" id="002">-->
-            <#--<a  class="top3" href="/login">登录</a>-->
-            <#--<a  class="top4" href="/regist">注册</a>-->
-        <#--</div>-->
         <div class="login">
-            <a  class="top3" href="/userinfo">您好！${username?default(" ")}</a>
+            <a  class="top3" href="">您好！${username?default(" ")}</a>
         </div>
     </div>
 </div>
 <div id="center">
-    <div class="left">
-        <ul>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a  class="left2" href="/classes/娱乐明星">娱乐明星</a>
-                <hr color="#ccffff"/>
-            </li>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a class="left2" href="/classes/热门电影" >热门电影</a>
-                <hr color="#ccffff"/>
-            </li>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a class="left2" href="/classes/体育赛事">体育赛事</a>
-                <hr color="#ccffff"/>
-            </li>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a class="left2" href="/classes/网络游戏">网络游戏</a>
-                <hr color="#ccffff"/>
-            </li>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a class="left2" href="/classes/动漫">动漫</a>
-                <hr color="#ccffff"/>
-            </li>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a class="left2" href="/classes/其他">其他</a>
-                <hr color="#ccffff"/>
-            </li>
-        </ul>
-
-    </div>
     <div class="background">
         <div class="center1">
-                <#list publishes>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                        <#--<th scope="col">#</th>-->
-                            <th scope="col">标题</th>
-                            <th scope="col">类别</th>
-                            <th scope="col">发布者</th>
-                            <th scope="col">发布时间</th>
-                            <th scope="col">详细内容</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <#items as publish>
-                            <tr>
-                            <#--<td scope="col">${publish.idpublish}</td>-->
-                                <td scope="col">${publish.textname}</td>
-                                <td scope="col">${publish.classes}</td>
-                                <td scope="col">${publish.username?default(" ")}</td>
-                                <td scope="col">${publish.date?string('yyyy-MM-dd HH:mm:ss')}</td>
-                                <td scope="col"><a href="/information/${publish.idpublish}">查看</a></td>
-                            </tr>
-                            </#items>
-                        </tbody>
-                    </table>
-                <#else>
-                    暂时还没有相关消息！
-                </#list>
-            <div class="pages">
-                <#assign pages=totalpages>
-                <#assign elements=totalelements>
-                <#assign no=number>
-                <#if (no < 1)>
-                    <a href="#">上一页</a>
-                <#else>
-                    <a href="/publish/index?page=${no-1}">上一页</a>
-                </#if>
-                <#if (no == pages-1)>
-                    <a href="#">下一页</a>
-                <#else>
-                    <a href="/publish/index?page=${no+1}">下一页</a>
-                </#if>
-                <a>共${totalpages?default("0")}页，共${totalelements?default("0")}条</a>
-            </div>
+            <a style="font-family: Consolas;font-size: xx-large">${textname}</a></br></br></br>
+            <a>${text}</a></br>
         </div>
     </div>
 </div>

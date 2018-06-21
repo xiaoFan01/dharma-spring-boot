@@ -49,6 +49,8 @@ public class loginCortroller {
             map.put("totalpages",pages.getTotalPages());
             map.put("totalelements",pages.getTotalElements());
             map.put("number",page);
+            if (name.equals("admin"))
+                return "admin";
             return "index1";
         }
         else{

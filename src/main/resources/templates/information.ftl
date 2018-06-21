@@ -11,7 +11,7 @@
         body{
             background-attachment: fixed;
             background-size:100% 100%;
-            background-image: url("../img/img2.jpg");
+            background-image: url("/img/img2.jpg");
         }
         #top{
             width:100%;

@@ -17,41 +17,41 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/likefind")
-public class LikeFind {
+@RequestMapping(value = "/admin")
+public class AdiminController {
 
     @Autowired
     PublishService publishService;
 
     @RequestMapping
-    public String likeFind(ModelMap map, @RequestParam(name = "page",defaultValue = "0") int no,@RequestParam(name = "findlikename") String name, HttpSession session){
-        int page = no;
-        int size = 13;
-        Sort sort = new Sort(Sort.Direction.DESC,"idpublish");
-        Pageable pageable = new PageRequest(page,size,sort);
-        Page<Publish> publishes = publishService.getByNameLike(pageable,"%"+name+"%");
-        List<Publish> lists= publishes.getContent();
-        map.put("publishes",lists);
-        map.put("username",session.getAttribute("username"));
-        map.put("totalpages",publishes.getTotalPages());
-        map.put("totalelements",publishes.getTotalElements());
-        map.put("number",page);
-        return "index1";
-    }
-    @RequestMapping("/02")
-    public String likeFind02(ModelMap map, @RequestParam(name = "page",defaultValue = "0") int no,@RequestParam(name = "findlikename") String name, HttpSession session){
+    public String getAllPublishById(ModelMap map, @RequestParam(name = "page",defaultValue = "0") int no,HttpSession session){
         Integer page = no;
         Integer size = 13;
         Sort sort = new Sort(Sort.Direction.DESC,"idpublish");
         Pageable pageable = new PageRequest(page,size,sort);
-        Page<Publish> publishes = publishService.getByNameLike(pageable,"%"+name+"%");
-        List<Publish> lists= publishes.getContent();
+        Page<Publish> pages = publishService.getPublishAll(pageable);
+        List<Publish> lists= pages.getContent();
         map.put("publishes",lists);
         map.put("username",session.getAttribute("username"));
-        map.put("totalpages",publishes.getTotalPages());
-        map.put("totalelements",publishes.getTotalElements());
+        map.put("totalpages",pages.getTotalPages());
+        map.put("totalelements",pages.getTotalElements());
         map.put("number",page);
         return "admin";
     }
-
+    @RequestMapping(value = "/del/{id}")
+    public String delPublishById(ModelMap map,@PathVariable int id,HttpSession session){
+        publishService.delPublish(id);
+        Integer page = 0;
+        Integer size = 13;
+        Sort sort = new Sort(Sort.Direction.DESC,"idpublish");
+        Pageable pageable = new PageRequest(page,size,sort);
+        Page<Publish> pages = publishService.getPublishAll(pageable);
+        List<Publish> lists= pages.getContent();
+        map.put("publishes",lists);
+        map.put("username",session.getAttribute("username"));
+        map.put("totalpages",pages.getTotalPages());
+        map.put("totalelements",pages.getTotalElements());
+        map.put("number",page);
+        return "admin";
+    }
 }

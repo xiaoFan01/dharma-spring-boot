@@ -157,9 +157,9 @@
             width: 30%;
         }
     </style>
-    <#--<link rel="stylesheet" href="/css/index1.css" rel="stylesheet">-->
+<#--<link rel="stylesheet" href="/css/index1.css" rel="stylesheet">-->
     <link href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <#--<link href="/css/index.css" rel="stylesheet"/>-->
+<#--<link href="/css/index.css" rel="stylesheet"/>-->
     <script type="text/javascript" src="/webjars/jquery/3.3.0/jquery.min.js"></script>
 </head>
 <body>
@@ -167,29 +167,27 @@
     <div class="first">
         <ul class="top1">
             <li class="top2">
-                <a  href="/publish/index">首页</a>
+                <a style="font-family: 'DejaVu Sans Mono', monospace">BBS</a>
+                <a  href="/admin">首页</a>
             </li>
             <li class="top2">
                 <a href="#">版面目录</a>
-            </li>
-            <li class="top2">
-                <a  href="/publish">发布</a>
             </li>
         </ul>
     </div>
     <div class="find">
         <div class="right">
-            <form action="/likefind">
+            <form action="/likefind/02">
                 <input  class="seek" name="findlikename" type="text"/>
                 <img class="img1" src="/img/find.png" alt="搜索">
             </form>
         </div>
-        <#--<div class="login" id="002">-->
-            <#--<a  class="top3" href="/login">登录</a>-->
-            <#--<a  class="top4" href="/regist">注册</a>-->
-        <#--</div>-->
+    <#--<div class="login" id="002">-->
+    <#--<a  class="top3" href="/login">登录</a>-->
+    <#--<a  class="top4" href="/regist">注册</a>-->
+    <#--</div>-->
         <div class="login">
-            <a  class="top3" href="/userinfo">您好！${username?default(" ")}</a>
+            <a  class="top3" href="">您好！${username?default(" ")}</a>
         </div>
     </div>
 </div>
@@ -198,32 +196,12 @@
         <ul>
             <li class="left1">
                 <hr color="#ccffff"/>
-                <a  class="left2" href="/classes/娱乐明星">娱乐明星</a>
+                <a  class="left2" href="/admin">通知</a>
                 <hr color="#ccffff"/>
             </li>
             <li class="left1">
                 <hr color="#ccffff"/>
-                <a class="left2" href="/classes/热门电影" >热门电影</a>
-                <hr color="#ccffff"/>
-            </li>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a class="left2" href="/classes/体育赛事">体育赛事</a>
-                <hr color="#ccffff"/>
-            </li>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a class="left2" href="/classes/网络游戏">网络游戏</a>
-                <hr color="#ccffff"/>
-            </li>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a class="left2" href="/classes/动漫">动漫</a>
-                <hr color="#ccffff"/>
-            </li>
-            <li class="left1">
-                <hr color="#ccffff"/>
-                <a class="left2" href="/classes/其他">其他</a>
+                <a class="left2" href="/login" >用户登陆</a>
                 <hr color="#ccffff"/>
             </li>
         </ul>
@@ -240,7 +218,7 @@
                             <th scope="col">类别</th>
                             <th scope="col">发布者</th>
                             <th scope="col">发布时间</th>
-                            <th scope="col">详细内容</th>
+                            <th scope="col">查看 / 删除</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -251,7 +229,7 @@
                                 <td scope="col">${publish.classes}</td>
                                 <td scope="col">${publish.username?default(" ")}</td>
                                 <td scope="col">${publish.date?string('yyyy-MM-dd HH:mm:ss')}</td>
-                                <td scope="col"><a href="/information/${publish.idpublish}">查看</a></td>
+                                <td scope="col"><a href="/information/02/${publish.idpublish}">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: red" href="/admin/del/${publish.idpublish}">删除</a></td>
                             </tr>
                             </#items>
                         </tbody>
@@ -266,12 +244,12 @@
                 <#if (no < 1)>
                     <a href="#">上一页</a>
                 <#else>
-                    <a href="/publish/index?page=${no-1}">上一页</a>
+                    <a href="/admin?page=${no-1}">上一页</a>
                 </#if>
                 <#if (no == pages-1)>
                     <a href="#">下一页</a>
                 <#else>
-                    <a href="/publish/index?page=${no+1}">下一页</a>
+                    <a href="/admin?page=${no+1}">下一页</a>
                 </#if>
                 <a>共${totalpages?default("0")}页，共${totalelements?default("0")}条</a>
             </div>
